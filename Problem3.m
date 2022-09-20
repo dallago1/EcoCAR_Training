@@ -1,6 +1,7 @@
 clc
 clear
-% Edit this line and look for changes
+% WEEEE
+%WEEEE
 %% Define Variables
 m=2.5; %kg
 y0 = 1; %m
