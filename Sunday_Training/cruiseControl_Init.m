@@ -34,6 +34,7 @@ F0 = 3500;  % [Nm]
 V_FF=0:5:40; %m/s refrence input speed for FF control
 F_FF = 0.5*rho*Cd*Af*V_FF.^2+(a+b*V_FF)*g*M_veh; % Assume it has 0 grade
 
+t=0:
 % figure
 % plot(V_FF,F_FF,'linewidth',2)
 % grid on
@@ -47,7 +48,13 @@ F_FF = 0.5*rho*Cd*Af*V_FF.^2+(a+b*V_FF)*g*M_veh; % Assume it has 0 grade
 %% Run Simulation
 Tend = 10*60;
 V0  = 25.5; % Initial Velocity [m/s] (57mph)
-
+V1 = 2.2352;
+V2 = 2.2352*2;
+V3 = 2.2352;
+V4 = -2.2352*3;
+V5 = 2.2352;
+V6 = 2.2352;
+V7 = -2.2352;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Design FB Controller
 V0=25.5;
@@ -67,25 +74,13 @@ T = feedback(sys,ctr);
 % hold all
 % step(T)
 
+
 out = sim('cruiseControlModel2018b',Tend);
-figure
-subplot(311)
-plot(out.tout,out.alpha/pi*180);
-grid on
-set(gca,'xticklabel',[],'ylim',[-5 5]);
-ylabel('Grade [deg]');
-subplot(312)
-plot(out.tout,out.u/1000);
-grid on
-hold on
-plot(out.tout,out.u_FB/1000);
-set(gca,'xticklabel',[],'ylim',[0 20]);
-ylabel('Traction Force [kNm]');
-subplot(313)
-plot(out.tsim,out.V_Veh);
-grid on
-hold on
-set(gca,'ylim',[0 40]);
-plot(out.tsim,out.V_ref,'r');
-xlabel('Time [s]')
-ylabel('Veh. Speed [m/s]');
+
+%% Plot
+% Road grade Variable name out.alpha
+% Plot feed back demand force out.u and out.u_FB
+% Plot vehichle speed and refrence vehichle speed out.V_Veh and out.V_ref
+% Plot vehichle speed and vehichle position on same graph fiugre out how to
+% use multiple axis graphs
+% Label, title, and add legends to all figure that need it
