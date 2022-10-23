@@ -34,7 +34,7 @@ F0 = 3500;  % [Nm]
 V_FF=0:5:40; %m/s refrence input speed for FF control
 F_FF = 0.5*rho*Cd*Af*V_FF.^2+(a+b*V_FF)*g*M_veh; % Assume it has 0 grade
 
-
+t = 0;
 % figure
 % plot(V_FF,F_FF,'linewidth',2)
 % grid on
@@ -63,12 +63,12 @@ A=-(rho*Cd*Af*V0+b*M_veh*g)/M_tot;
 B=1/M_tot;
 C=1;
 D=0;
-sys= ss(A,B,C,D);
+%sys = ss(A,B,C,D);
 Kp=1000;
 ki=150;
 kd=0;
-ctr=pid(Kp,ki,kd);
-T = feedback(sys,ctr);
+%ctr=pid(Kp,ki,kd);
+%T = feedback(sys,ctr);
 % figure
 % step(sys)
 % hold all
@@ -80,7 +80,31 @@ out = sim('cruiseControlModel2018b',Tend);
 %% Plot
 % Road grade Variable name out.alpha
 % Plot feed back demand force out.u and out.u_FB
-% Plot vehichle speed and refrence vehichle speed out.V_Veh and out.V_ref
-% Plot vehichle speed and vehichle position on same graph fiugre out how to
-% use multiple axis graphs
+% Plot vehicle speed and refrence vehicle speed out.V_Veh and out.V_ref
+% Plot vehicle speed and vehichle position (out.S_Veh) on same graph to 
+% figure out how to use multiple axis graphs
 % Label, title, and add legends to all figure that need it
+
+figure
+plot(out.tsim, out.alpha)
+title('Road Grade')
+xlabel('Time')
+ylabel('Grade, Rad')
+
+figure
+plot(out.tsim, out.u_FB, out.tsim, out.u)
+title('Feedback Demand Force')
+xlabel('Time, s')
+ylabel('Force, N')
+
+figure
+plot(out.tsim, out.V_Veh, 'b-', out.tsim, out.S_Veh, 'r-')
+title('V (blue) vs. S (red)')
+xlabel('Time, s')
+ylabel('S/V, m/s')
+
+figure
+plot(out.tsim, out.V_ref)
+title('Reference Vehicle Speed')
+xlabel('Time, s')
+ylabel('V, m/s')
