@@ -34,7 +34,7 @@ F0 = 3500;  % [Nm]
 V_FF=0:5:40; %m/s refrence input speed for FF control
 F_FF = 0.5*rho*Cd*Af*V_FF.^2+(a+b*V_FF)*g*M_veh; % Assume it has 0 grade
 
-t=0:
+
 % figure
 % plot(V_FF,F_FF,'linewidth',2)
 % grid on
