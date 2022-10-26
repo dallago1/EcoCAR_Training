@@ -85,26 +85,3 @@ out = sim('cruiseControlModel2018b',Tend);
 % figure out how to use multiple axis graphs
 % Label, title, and add legends to all figure that need it
 
-figure
-plot(out.tsim, out.alpha)
-title('Road Grade')
-xlabel('Time')
-ylabel('Grade, Rad')
-
-figure
-plot(out.tsim, out.u_FB, out.tsim, out.u)
-title('Feedback Demand Force')
-xlabel('Time, s')
-ylabel('Force, N')
-
-figure
-plot(out.tsim, out.V_Veh, 'b-', out.tsim, out.S_Veh, 'r-')
-title('V (blue) vs. S (red)')
-xlabel('Time, s')
-ylabel('S/V, m/s')
-
-figure
-plot(out.tsim, out.V_ref)
-title('Reference Vehicle Speed')
-xlabel('Time, s')
-ylabel('V, m/s')
