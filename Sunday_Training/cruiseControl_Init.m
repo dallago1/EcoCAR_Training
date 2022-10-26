@@ -86,27 +86,18 @@ out = sim('cruiseControlModel2018b',Tend);
 % Label, title, and add legends to all figure that need it
 
 figure
-plot(out.tsim, out.alpha)
-title('Road Grade')
-xlabel('Time')
-ylabel('Grade, Rad')
-
+plot(out.tsim,out.V_Veh)
+hold on 
+plot(out.tsim,out.V_ref)
+xlabel('time')
+ylabel('speed')
+legend('Vericle velocity', 'leference velocity')
+title('Cruising Control Graph')
 figure
-plot(out.tsim, out.u_FB, out.tsim, out.u)
-title('Feedback Demand Force')
-xlabel('Time, s')
-ylabel('Force, N')
+plot(out.tsim,out.S_Veh)
+xlabel('time')
+ylabel('Distance')
+title('Cruising Control Graph')
 
-figure
-plot(out.tsim, out.V_Veh, 'b-', out.tsim, out.S_Veh, 'r-')
-title('V (blue) vs. S (red)')
-xlabel('Time, s')
-ylabel('S/V, m/s')
-
-figure
-plot(out.tsim, out.V_ref)
-title('Reference Vehicle Speed')
-xlabel('Time, s')
-ylabel('V, m/s')
 
 %Comment for testing git
